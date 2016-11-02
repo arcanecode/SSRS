@@ -1,0 +1,254 @@
+// Sales by Quarter Bar Chart
+// Sales by Invoice Year
+SELECT NON EMPTY [Measures].[Sales Total Including Tax] ON COLUMNS
+     , NON EMPTY [Invoice Date].[Year].[Year].Members
+	     ON ROWS
+  FROM [Wide World Importers]
+;
+
+// KPI 1 (Green)
+// Sales Quantity KPI
+SELECT {KPIValue("Sales Quantity KPI"), KPIGoal("Sales Quantity KPI"), KPIStatus("Sales Quantity KPI")}
+ON COLUMNS
+FROM [Wide World Importers]
+
+// Sales Invoice YTD vs Previous YTD
+SELECT { [Measures].[Sales Total Including Tax Invoice YTD]
+       , [Measures].[Sales Total Including Tax Previous Invoice YTD]
+       }
+       ON COLUMNS
+       , STRTOMEMBER("[Invoice Date].[Year].[Year].[" + CSTR(YEAR(NOW())) + "]") ON ROWS
+  FROM [Wide World Importers]
+;
+
+// KPI 2 (red)
+// KPI: Sales total including tax
+
+// Trend: Sales Total Including Tax Over Time
+SELECT NON EMPTY [Measures].[Sales Total Including Tax] ON COLUMNS
+     , NON EMPTY [Invoice Date].[Month Year].[Month Year].Members ON ROWS
+FROM [Wide World Importers]
+
+
+// Sales by State Map
+// Sales by State
+SELECT NON EMPTY [Measures].[Sales Total Including Tax] ON COLUMNS
+     , NON EMPTY [City].[State Province].[State Province].Members ON ROWS
+FROM [Wide World Importers]
+;
+
+// Sales by State/Year  Report
+// Sales by State - Invoice Year
+SELECT NON EMPTY [Measures].[Sales Total Including Tax] ON COLUMNS
+     , NON EMPTY 
+       ( [City].[State Province].[State Province].Members 
+       , [Invoice Date].[Year].[Year].Members
+       )
+       ON ROWS
+FROM [Wide World Importers]
+;
+
+
+// Treemap Report
+// Sales by Year and Territory
+SELECT NON EMPTY [Measures].[Sales Total Including Tax] ON COLUMNS
+     , NON EMPTY ( [Invoice Date].[Year].[Year].Members 
+	               , [City].[Sales Territory].[Sales Territory].Members
+                 )
+	   ON ROWS
+FROM [Wide World Importers]
+;
+
+// Sunburst Report
+SELECT NON EMPTY [Measures].[Sales Total Including Tax] ON COLUMNS
+     , NON EMPTY ( [Customer].[Bill To Customer].[Bill To Customer].Members
+                 , ( [Invoice Date].[Year].[Year].Members 
+	                 , [Invoice Date].[Quarter].[Quarter].Members
+	                 , [Invoice Date].[Month Abbreviation].[Month Abbreviation].Members
+	                 )
+				         )
+	   ON ROWS
+FROM [Wide World Importers]
+;
+
+// Used in dashboard
+// WWI Cube State Employee Sales Data
+WITH 
+  MEMBER [Measures].[Beginning Of Month DateTime] AS  
+    CDATE( [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name )
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax] 
+                 , [Measures].[Beginning Of Month DateTime]
+                 }
+       ON COLUMNS 
+     , NON EMPTY [City].[State Province].[State Province].Members
+                 * [Employee].[Employee].[Employee].Members
+                 * [Invoice Date].[Calendar Beginning Time Period].[Beginning Of Month].Members  
+                 HAVING NOT IsEmpty([Measures].[Sales Total Including Tax])
+       ON ROWS 
+  FROM [Wide World Importers]
+;
+
+// WWI Cube Employee List
+SELECT {} ON COLUMNS
+     , [Employee].[Employee].[Employee].Members ON ROWS
+  FROM [Wide World Importers]
+;
+
+// WWI Cube State List
+SELECT {} ON COLUMNS
+     , [City].[State Province].[State Province].Members ON ROWS
+  FROM [Wide World Importers]
+;
+
+
+
+
+// Other stuff -------------------------------------------------------------------------------------------------
+WITH 
+  MEMBER [Measures].[DateAsDateTime] AS
+  CDate([Invoice Date].[Calendar].CurrentMember.Name)
+SELECT NON EMPTY {[Measures].[Sales Total Including Tax] , [Measures].[DateAsDateTime]}
+       ON COLUMNS
+     , NON EMPTY [Invoice Date].[Calendar].[Date].Members                 
+	     ON ROWS
+  FROM [Wide World Importers]
+;
+
+WITH 
+  MEMBER [Measures].[DateAsDateTime] AS  
+    CDate([Invoice Date].[Calendar].CurrentMember.Name) 
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax] 
+                 , [Measures].[DateAsDateTime]
+                 } 
+       ON COLUMNS 
+     , NON EMPTY [Invoice Date].[Calendar].[Date].Members  
+       ON ROWS 
+  FROM [Wide World Importers]
+;
+
+WITH 
+  MEMBER [Measures].[X] AS  
+    [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name
+  MEMBER [Measures].[DateAsDateTime] AS  
+    CDate([Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name) 
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax] 
+                 , [Measures].[DateAsDateTime]
+                 , [Measures].[X]
+                 }
+       ON COLUMNS 
+     , NON EMPTY [Invoice Date].[Calendar Beginning Time Period].[Beginning Of Quarter].Members  
+       ON ROWS 
+  FROM [Wide World Importers]
+;
+
+WITH 
+  MEMBER [Measures].[W] AS
+    [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name
+  MEMBER [Measures].[X] AS  
+    CDATE( [Measures].[W] )
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax] 
+                 , [Measures].[W]
+                 , [Measures].[X]
+                 }
+       ON COLUMNS 
+     , NON EMPTY [Invoice Date].[Calendar Beginning Time Period].[Beginning Of Quarter].Members  
+       ON ROWS 
+  FROM [Wide World Importers]
+;
+
+WITH 
+//  MEMBER [Measures].[W] AS
+//    [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name
+  MEMBER [Measures].[X] AS  
+    CDATE( [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name )
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax] 
+//                 , [Measures].[W]
+                 , [Measures].[X]
+                 }
+       ON COLUMNS 
+     , NON EMPTY [Invoice Date].[Calendar Beginning Time Period].[Beginning Of Quarter].Members  
+       ON ROWS 
+  FROM [Wide World Importers]
+;
+
+NONEMPTY([Employee].[Employee].[Employee].Members
+                              , [Measures].[Sales Quantity]
+                              )
+                     , 5
+                     , [Measures].[Sales Quantity]
+
+
+//working
+WITH 
+//  MEMBER [Measures].[W] AS
+//    [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name
+  MEMBER [Measures].[X] AS  
+    CDATE( [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name )
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax] 
+//                 , [Measures].[W]
+                 , [Measures].[X]
+                 }
+       ON COLUMNS 
+     , NON EMPTY [Invoice Date].[Calendar Beginning Time Period].[Beginning Of Quarter].Members  
+       ON ROWS 
+  FROM [Wide World Importers]
+;
+
+WITH 
+  MEMBER [Measures].[Beginning Of Quarter DateTime] AS  
+    CDATE( [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name )
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax] 
+                 , [Measures].[Beginning Of Quarter DateTime]
+                 }
+       ON COLUMNS 
+     , NON EMPTY [Invoice Date].[Calendar Beginning Time Period].[Beginning Of Quarter].Members  
+       ON ROWS 
+  FROM [Wide World Importers]
+;
+
+// Final working version
+WITH 
+  MEMBER [Measures].[Beginning Of Month DateTime] AS  
+    CDATE( [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name )
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax] 
+                 , [Measures].[Beginning Of Month DateTime]
+                 }
+       ON COLUMNS 
+     , NON EMPTY [Invoice Date].[Calendar Beginning Time Period].[Beginning Of Month].Members  
+       ON ROWS 
+  FROM [Wide World Importers]
+;
+
+
+// Working with other data! Too many rows though for Mobile Report
+WITH 
+  MEMBER [Measures].[Beginning Of Month DateTime] AS  
+    CDATE( [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name )
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax] 
+                 , [Measures].[Beginning Of Month DateTime]
+                 }
+       ON COLUMNS 
+     , NON EMPTY [City].[State Province].[State Province].Members
+                 * [Stock Item].[Stock Item].[Stock Item].Members
+                 * [Invoice Date].[Calendar Beginning Time Period].[Beginning Of Month].Members  
+                 HAVING NOT IsEmpty([Measures].[Sales Total Including Tax])
+       ON ROWS 
+  FROM [Wide World Importers]
+;
+
+// Smaller result set
+WITH 
+  MEMBER [Measures].[Beginning Of Month DateTime] AS  
+    CDATE( [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name )
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax] 
+                 , [Measures].[Beginning Of Month DateTime]
+                 }
+       ON COLUMNS 
+     , NON EMPTY [City].[State Province].[State Province].Members
+                 * [Customer].[Bill To Customer].[Bill To Customer].Members
+                 * [Invoice Date].[Calendar Beginning Time Period].[Beginning Of Month].Members  
+                 HAVING NOT IsEmpty([Measures].[Sales Total Including Tax])
+       ON ROWS 
+  FROM [Wide World Importers]
+;
+

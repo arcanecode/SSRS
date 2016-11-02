@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Report MustUnderstand="df" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:df="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition/defaultfontfamily">
+  <df:DefaultFontFamily>Segoe UI</df:DefaultFontFamily>
+  <AutoRefresh>0</AutoRefresh>
+  <DataSources>
+    <DataSource Name="WideWorldImportersSSASMD">
+      <DataSourceReference>/Data Sources/WideWorldImporters-SSAS-MD</DataSourceReference>
+      <rd:SecurityType>None</rd:SecurityType>
+      <rd:DataSourceID>5b631d68-c799-400a-9363-67f829562a3b</rd:DataSourceID>
+    </DataSource>
+  </DataSources>
+  <DataSets>
+    <DataSet Name="DataSet1">
+      <Query>
+        <DataSourceName>WideWorldImportersSSASMD</DataSourceName>
+        <CommandText>SELECT NON EMPTY [Measures].[Sales Total Including Tax] ON COLUMNS
+     , NON EMPTY ( [Customer].[Bill To Customer].[Bill To Customer].Members
+                 , ( [Invoice Date].[Year].[Year].Members 
+	                 , [Invoice Date].[Quarter].[Quarter].Members
+	                 , [Invoice Date].[Month Abbreviation].[Month Abbreviation].Members
+	                 )
+				         )
+	   ON ROWS
+FROM [Wide World Importers]</CommandText>
+        <rd:DesignerState>&amp;lt;QueryDefinition xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://schemas.microsoft.com/AnalysisServices/QueryDefinition"&amp;gt;&amp;lt;CommandType&amp;gt;MDX&amp;lt;/CommandType&amp;gt;&amp;lt;Type&amp;gt;Query&amp;lt;/Type&amp;gt;&amp;lt;QuerySpecification xsi:type="MDXQuerySpecification"&amp;gt;&amp;lt;Select&amp;gt;&amp;lt;Items&amp;gt;&amp;lt;Item&amp;gt;&amp;lt;ID xsi:type="Level"&amp;gt;&amp;lt;DimensionName&amp;gt;Customer&amp;lt;/DimensionName&amp;gt;&amp;lt;HierarchyName&amp;gt;Bill To Customer&amp;lt;/HierarchyName&amp;gt;&amp;lt;HierarchyUniqueName&amp;gt;[Customer].[Bill To Customer]&amp;lt;/HierarchyUniqueName&amp;gt;&amp;lt;LevelName&amp;gt;Bill To Customer&amp;lt;/LevelName&amp;gt;&amp;lt;UniqueName&amp;gt;[Customer].[Bill To Customer].[Bill To Customer]&amp;lt;/UniqueName&amp;gt;&amp;lt;/ID&amp;gt;&amp;lt;ItemCaption&amp;gt;Bill To Customer&amp;lt;/ItemCaption&amp;gt;&amp;lt;/Item&amp;gt;&amp;lt;Item&amp;gt;&amp;lt;ID xsi:type="Level"&amp;gt;&amp;lt;DimensionName&amp;gt;Invoice Date&amp;lt;/DimensionName&amp;gt;&amp;lt;HierarchyName&amp;gt;Year&amp;lt;/HierarchyName&amp;gt;&amp;lt;HierarchyUniqueName&amp;gt;[Invoice Date].[Year]&amp;lt;/HierarchyUniqueName&amp;gt;&amp;lt;LevelName&amp;gt;Year&amp;lt;/LevelName&amp;gt;&amp;lt;UniqueName&amp;gt;[Invoice Date].[Year].[Year]&amp;lt;/UniqueName&amp;gt;&amp;lt;/ID&amp;gt;&amp;lt;ItemCaption&amp;gt;Year&amp;lt;/ItemCaption&amp;gt;&amp;lt;/Item&amp;gt;&amp;lt;Item&amp;gt;&amp;lt;ID xsi:type="Level"&amp;gt;&amp;lt;DimensionName&amp;gt;Invoice Date&amp;lt;/DimensionName&amp;gt;&amp;lt;HierarchyName&amp;gt;Quarter&amp;lt;/HierarchyName&amp;gt;&amp;lt;HierarchyUniqueName&amp;gt;[Invoice Date].[Quarter]&amp;lt;/HierarchyUniqueName&amp;gt;&amp;lt;LevelName&amp;gt;Quarter&amp;lt;/LevelName&amp;gt;&amp;lt;UniqueName&amp;gt;[Invoice Date].[Quarter].[Quarter]&amp;lt;/UniqueName&amp;gt;&amp;lt;/ID&amp;gt;&amp;lt;ItemCaption&amp;gt;Quarter&amp;lt;/ItemCaption&amp;gt;&amp;lt;/Item&amp;gt;&amp;lt;Item&amp;gt;&amp;lt;ID xsi:type="Level"&amp;gt;&amp;lt;DimensionName&amp;gt;Invoice Date&amp;lt;/DimensionName&amp;gt;&amp;lt;HierarchyName&amp;gt;Month Abbreviation&amp;lt;/HierarchyName&amp;gt;&amp;lt;HierarchyUniqueName&amp;gt;[Invoice Date].[Month Abbreviation]&amp;lt;/HierarchyUniqueName&amp;gt;&amp;lt;LevelName&amp;gt;Month Abbreviation&amp;lt;/LevelName&amp;gt;&amp;lt;UniqueName&amp;gt;[Invoice Date].[Month Abbreviation].[Month Abbreviation]&amp;lt;/UniqueName&amp;gt;&amp;lt;/ID&amp;gt;&amp;lt;ItemCaption&amp;gt;Month Abbreviation&amp;lt;/ItemCaption&amp;gt;&amp;lt;/Item&amp;gt;&amp;lt;Item&amp;gt;&amp;lt;ID xsi:type="Measure"&amp;gt;&amp;lt;MeasureName&amp;gt;Sales Total Including Tax&amp;lt;/MeasureName&amp;gt;&amp;lt;UniqueName&amp;gt;[Measures].[Sales Total Including Tax]&amp;lt;/UniqueName&amp;gt;&amp;lt;/ID&amp;gt;&amp;lt;ItemCaption&amp;gt;Sales Total Including Tax&amp;lt;/ItemCaption&amp;gt;&amp;lt;FormattedValue&amp;gt;true&amp;lt;/FormattedValue&amp;gt;&amp;lt;/Item&amp;gt;&amp;lt;/Items&amp;gt;&amp;lt;/Select&amp;gt;&amp;lt;From&amp;gt;Wide World Importers&amp;lt;/From&amp;gt;&amp;lt;Filter&amp;gt;&amp;lt;FilterItems /&amp;gt;&amp;lt;/Filter&amp;gt;&amp;lt;Calculations /&amp;gt;&amp;lt;Aggregates /&amp;gt;&amp;lt;QueryProperties /&amp;gt;&amp;lt;/QuerySpecification&amp;gt;&amp;lt;Query&amp;gt;&amp;lt;Statement&amp;gt;SELECT NON EMPTY [Measures].[Sales Total Including Tax] ON COLUMNS
+     , NON EMPTY ( [Customer].[Bill To Customer].[Bill To Customer].Members
+                 , ( [Invoice Date].[Year].[Year].Members 
+	                 , [Invoice Date].[Quarter].[Quarter].Members
+	                 , [Invoice Date].[Month Abbreviation].[Month Abbreviation].Members
+	                 )
+				         )
+	   ON ROWS
+FROM [Wide World Importers]
+&amp;lt;/Statement&amp;gt;&amp;lt;ParameterDefinitions /&amp;gt;&amp;lt;/Query&amp;gt;&amp;lt;/QueryDefinition&amp;gt;</rd:DesignerState>
+      </Query>
+      <Fields>
+        <Field Name="Bill_To_Customer">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Customer].[Bill To Customer].[Bill To Customer]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Year">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Invoice Date].[Year].[Year]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Quarter">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Invoice Date].[Quarter].[Quarter]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Month_Abbreviation">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Level" UniqueName="[Invoice Date].[Month Abbreviation].[Month Abbreviation]" /&gt;</DataField>
+          <rd:TypeName>System.String</rd:TypeName>
+        </Field>
+        <Field Name="Sales_Total_Including_Tax">
+          <DataField>&lt;?xml version="1.0" encoding="utf-8"?&gt;&lt;Field xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xsi:type="Measure" UniqueName="[Measures].[Sales Total Including Tax]" /&gt;</DataField>
+          <rd:TypeName>System.Int32</rd:TypeName>
+        </Field>
+      </Fields>
+    </DataSet>
+  </DataSets>
+  <ReportSections>
+    <ReportSection>
+      <Body>
+        <ReportItems>
+          <Chart Name="Chart1">
+            <ChartCategoryHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart1_CategoryGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Year.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!Year.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <ChartMembers>
+                    <ChartMember>
+                      <Group Name="Chart1_CategoryGroup1">
+                        <GroupExpressions>
+                          <GroupExpression>=Fields!Quarter.Value</GroupExpression>
+                        </GroupExpressions>
+                      </Group>
+                      <SortExpressions>
+                        <SortExpression>
+                          <Value>=Fields!Quarter.Value</Value>
+                        </SortExpression>
+                      </SortExpressions>
+                      <ChartMembers>
+                        <ChartMember>
+                          <Group Name="Chart1_CategoryGroup2">
+                            <GroupExpressions>
+                              <GroupExpression>=Fields!Month_Abbreviation.Value</GroupExpression>
+                            </GroupExpressions>
+                          </Group>
+                          <SortExpressions>
+                            <SortExpression>
+                              <Value>=Fields!Month_Abbreviation.Value</Value>
+                            </SortExpression>
+                          </SortExpressions>
+                          <Label>=Fields!Month_Abbreviation.Value</Label>
+                        </ChartMember>
+                      </ChartMembers>
+                      <Label>=Fields!Quarter.Value</Label>
+                    </ChartMember>
+                  </ChartMembers>
+                  <Label>=Fields!Year.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartCategoryHierarchy>
+            <ChartSeriesHierarchy>
+              <ChartMembers>
+                <ChartMember>
+                  <Group Name="Chart1_SeriesGroup">
+                    <GroupExpressions>
+                      <GroupExpression>=Fields!Bill_To_Customer.Value</GroupExpression>
+                    </GroupExpressions>
+                  </Group>
+                  <SortExpressions>
+                    <SortExpression>
+                      <Value>=Fields!Bill_To_Customer.Value</Value>
+                    </SortExpression>
+                  </SortExpressions>
+                  <Label>=Fields!Bill_To_Customer.Value</Label>
+                </ChartMember>
+              </ChartMembers>
+            </ChartSeriesHierarchy>
+            <ChartData>
+              <ChartSeriesCollection>
+                <ChartSeries Name="Sales_Total_Including_Tax">
+                  <ChartDataPoints>
+                    <ChartDataPoint>
+                      <ChartDataPointValues>
+                        <X>=Fields!Year.Value</X>
+                        <Y>=Sum(Fields!Sales_Total_Including_Tax.Value)</Y>
+                      </ChartDataPointValues>
+                      <ChartDataLabel>
+                        <Style>
+                          <FontSize>9pt</FontSize>
+                        </Style>
+                        <UseValueAsLabel>true</UseValueAsLabel>
+                        <Visible>true</Visible>
+                      </ChartDataLabel>
+                      <ToolTip>= Fields!Month_Abbreviation.Value &amp; ", " &amp; Fields!Quarter.Value &amp; ", " &amp; Fields!Year.Value &amp; ": " &amp; FormatCurrency(Fields!Sales_Total_Including_Tax.Value, 0)</ToolTip>
+                      <Style />
+                      <ChartMarker>
+                        <Style />
+                      </ChartMarker>
+                      <DataElementOutput>Output</DataElementOutput>
+                    </ChartDataPoint>
+                  </ChartDataPoints>
+                  <Type>Shape</Type>
+                  <Subtype>Sunburst</Subtype>
+                  <Style>
+                    <ShadowOffset>0pt</ShadowOffset>
+                  </Style>
+                  <ChartEmptyPoints>
+                    <Style />
+                    <ChartMarker>
+                      <Style />
+                    </ChartMarker>
+                    <ChartDataLabel>
+                      <Style />
+                    </ChartDataLabel>
+                  </ChartEmptyPoints>
+                  <ValueAxisName>Primary</ValueAxisName>
+                  <CategoryAxisName>Primary</CategoryAxisName>
+                  <ChartSmartLabel>
+                    <CalloutLineColor>Black</CalloutLineColor>
+                    <MinMovingDistance>0pt</MinMovingDistance>
+                  </ChartSmartLabel>
+                </ChartSeries>
+              </ChartSeriesCollection>
+            </ChartData>
+            <ChartAreas>
+              <ChartArea Name="Default">
+                <ChartCategoryAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <Border>
+                        <Color>#5c5c5c</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <Border>
+                        <Color>#5c5c5c</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Enabled>False</Enabled>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartCategoryAxes>
+                <ChartValueAxes>
+                  <ChartAxis Name="Primary">
+                    <Style>
+                      <Border>
+                        <Color>#5c5c5c</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                  <ChartAxis Name="Secondary">
+                    <Style>
+                      <Border>
+                        <Color>#5c5c5c</Color>
+                        <Style>None</Style>
+                      </Border>
+                      <FontSize>8pt</FontSize>
+                      <Color>#5c5c5c</Color>
+                    </Style>
+                    <ChartAxisTitle>
+                      <Caption />
+                      <Style>
+                        <FontSize>9pt</FontSize>
+                        <Color>#5c5c5c</Color>
+                      </Style>
+                    </ChartAxisTitle>
+                    <ChartMajorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                        </Border>
+                      </Style>
+                    </ChartMajorGridLines>
+                    <ChartMinorGridLines>
+                      <Style>
+                        <Border>
+                          <Color>Gainsboro</Color>
+                          <Style>Dotted</Style>
+                        </Border>
+                      </Style>
+                    </ChartMinorGridLines>
+                    <ChartMajorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                          <Style>None</Style>
+                        </Border>
+                      </Style>
+                    </ChartMajorTickMarks>
+                    <ChartMinorTickMarks>
+                      <Style>
+                        <Border>
+                          <Color>LightGrey</Color>
+                        </Border>
+                      </Style>
+                      <Length>0.5</Length>
+                    </ChartMinorTickMarks>
+                    <CrossAt>NaN</CrossAt>
+                    <Location>Opposite</Location>
+                    <Minimum>NaN</Minimum>
+                    <Maximum>NaN</Maximum>
+                    <ChartAxisScaleBreak>
+                      <Style />
+                    </ChartAxisScaleBreak>
+                  </ChartAxis>
+                </ChartValueAxes>
+                <Style>
+                  <BackgroundColor>#00ffffff</BackgroundColor>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                </Style>
+              </ChartArea>
+            </ChartAreas>
+            <ChartLegends>
+              <ChartLegend Name="Default">
+                <Style>
+                  <Border>
+                    <Color>#5c5c5c</Color>
+                  </Border>
+                  <BackgroundGradientType>TopBottom</BackgroundGradientType>
+                  <FontSize>8pt</FontSize>
+                </Style>
+                <Position>TopLeft</Position>
+                <ChartLegendTitle>
+                  <Caption />
+                  <Style>
+                    <FontSize>8pt</FontSize>
+                    <FontWeight>Bold</FontWeight>
+                    <TextAlign>Center</TextAlign>
+                  </Style>
+                </ChartLegendTitle>
+                <HeaderSeparatorColor>Black</HeaderSeparatorColor>
+                <ColumnSeparatorColor>Black</ColumnSeparatorColor>
+              </ChartLegend>
+            </ChartLegends>
+            <ChartTitles>
+              <ChartTitle Name="Default">
+                <Caption>Chart Title</Caption>
+                <Style>
+                  <BackgroundGradientType>None</BackgroundGradientType>
+                  <FontSize>9pt</FontSize>
+                  <FontWeight>Normal</FontWeight>
+                  <TextAlign>Left</TextAlign>
+                  <VerticalAlign>Top</VerticalAlign>
+                  <Color>#a6a6a6</Color>
+                </Style>
+                <Position>TopLeft</Position>
+              </ChartTitle>
+            </ChartTitles>
+            <Palette>Pacific</Palette>
+            <ChartBorderSkin>
+              <Style>
+                <BackgroundColor>Gray</BackgroundColor>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <Color>White</Color>
+              </Style>
+            </ChartBorderSkin>
+            <ChartNoDataMessage Name="NoDataMessage">
+              <Caption>No Data Available</Caption>
+              <Style>
+                <BackgroundGradientType>None</BackgroundGradientType>
+                <FontWeight>Bold</FontWeight>
+                <TextAlign>General</TextAlign>
+                <VerticalAlign>Top</VerticalAlign>
+              </Style>
+            </ChartNoDataMessage>
+            <DataSetName>DataSet1</DataSetName>
+            <Height>6.13542in</Height>
+            <Width>8.03125in</Width>
+            <Style>
+              <Border>
+                <Color>#5c5c5c</Color>
+                <Style>None</Style>
+                <Width>2pt</Width>
+              </Border>
+              <BackgroundColor>White</BackgroundColor>
+              <BackgroundGradientType>None</BackgroundGradientType>
+            </Style>
+          </Chart>
+        </ReportItems>
+        <Height>6.13542in</Height>
+        <Style>
+          <Border>
+            <Style>None</Style>
+          </Border>
+        </Style>
+      </Body>
+      <Width>8.03125in</Width>
+      <Page>
+        <LeftMargin>1in</LeftMargin>
+        <RightMargin>1in</RightMargin>
+        <TopMargin>1in</TopMargin>
+        <BottomMargin>1in</BottomMargin>
+        <Style />
+      </Page>
+    </ReportSection>
+  </ReportSections>
+  <ReportParametersLayout>
+    <GridLayoutDefinition>
+      <NumberOfColumns>4</NumberOfColumns>
+      <NumberOfRows>2</NumberOfRows>
+    </GridLayoutDefinition>
+  </ReportParametersLayout>
+  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportServerUrl>http://localhost/reportserver</rd:ReportServerUrl>
+  <rd:ReportID>95370284-3194-4380-8392-6df6c453b7a0</rd:ReportID>
+</Report>

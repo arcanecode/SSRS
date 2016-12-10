@@ -7,12 +7,11 @@ SELECT NON EMPTY [Measures].[Sales Total Including Tax] ON COLUMNS
 ;
 
 // KPI 1 (Green)
-// Sales Quantity KPI
+// Sales Invoice YTD vs Previous YTD
 SELECT {KPIValue("Sales Quantity KPI"), KPIGoal("Sales Quantity KPI"), KPIStatus("Sales Quantity KPI")}
 ON COLUMNS
 FROM [Wide World Importers]
 
-// Sales Invoice YTD vs Previous YTD
 SELECT { [Measures].[Sales Total Including Tax Invoice YTD]
        , [Measures].[Sales Total Including Tax Previous Invoice YTD]
        }
@@ -97,6 +96,28 @@ SELECT {} ON COLUMNS
 // WWI Cube State List
 SELECT {} ON COLUMNS
      , [City].[State Province].[State Province].Members ON ROWS
+  FROM [Wide World Importers]
+;
+
+// Used in drill thru target
+// WWI Cube Detail Sales Data
+WITH 
+  MEMBER [Measures].[Beginning Of Month DateTime] AS  
+    CDATE( [Invoice Date].[Calendar Beginning Time Period].CurrentMember.Name )
+SELECT NON EMPTY { [Measures].[Sales Total Including Tax]
+                 , [Measures].[Sales Total Excluding Tax]
+                 , [Measures].[Sales Tax Amount]
+                 , [Measures].[Sales Tax Rate]
+                 , [Measures].[Sales Profit]
+                 , [Measures].[Sales Quantity] 
+                 , [Measures].[Beginning Of Month DateTime]
+                 }
+       ON COLUMNS 
+     , NON EMPTY [City].[State Province].[State Province].Members
+                 * [Employee].[Employee].[Employee].Members
+                 * [Invoice Date].[Calendar Beginning Time Period].[Beginning Of Month].Members  
+                 HAVING NOT IsEmpty([Measures].[Sales Total Including Tax])
+       ON ROWS 
   FROM [Wide World Importers]
 ;
 
